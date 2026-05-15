@@ -106,3 +106,4 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 # ── Misc ───────────────────────────────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
