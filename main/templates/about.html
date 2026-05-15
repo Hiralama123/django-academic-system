@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}About — Django Lab{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div class="sec-marker">
+            <span class="sec-num">About</span>
+            <span class="sec-line"></span>
+        </div>
+        <h1>About <span>Django Lab</span></h1>
+    </div>
+
+    <div class="about-content">
+        <p>Django Lab is a full-stack CRUD application demonstrating core Django concepts — models, views, templates, forms, authentication, and the admin interface.</p>
+        <p>Built as a learning project to explore Django's ORM, URL routing, class-based views, and user authentication with session management.</p>
+
+        <dl class="info-grid">
+            <div class="info-card">
+                <dt>Framework</dt>
+                <dd>Django 6.x</dd>
+            </div>
+            <div class="info-card">
+                <dt>Database</dt>
+                <dd>SQLite3</dd>
+            </div>
+            <div class="info-card">
+                <dt>Language</dt>
+                <dd>Python 3</dd>
+            </div>
+            <div class="info-card">
+                <dt>Auth</dt>
+                <dd>Django Auth</dd>
+            </div>
+        </dl>
+    </div>
+</div>
+{% endblock %}

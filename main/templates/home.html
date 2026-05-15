@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Home — Django Lab{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="sec-marker">
+                <span class="sec-num">01 — Welcome</span>
+                <span class="sec-line"></span>
+            </div>
+            <h1>Django<br><strong>Lab</strong></h1>
+            <p>A full-featured student management system built with Django. Manage students, courses, and registrations in one place.</p>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                <a href="{% url 'student_list' %}" class="btn btn-primary">View Students</a>
+                <a href="{% url 'about' %}" class="btn btn-ghost">Learn More</a>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <a href="{% url 'student_list' %}" class="feature-card">
+                <div class="feature-card-num">01</div>
+                <h3>Students</h3>
+                <p>Add, edit, and manage student records including names and contact details.</p>
+                <div class="feature-card-arrow">Manage →</div>
+            </a>
+            <a href="{% url 'course_list' %}" class="feature-card">
+                <div class="feature-card-num">02</div>
+                <h3>Courses</h3>
+                <p>Browse and manage courses with codes, instructors, and credit hours.</p>
+                <div class="feature-card-arrow">Browse →</div>
+            </a>
+            <a href="{% url 'registration_list' %}" class="feature-card">
+                <div class="feature-card-num">03</div>
+                <h3>Registrations</h3>
+                <p>Track which students are enrolled in which courses, with grade records.</p>
+                <div class="feature-card-arrow">Explore →</div>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

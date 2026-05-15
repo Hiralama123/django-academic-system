@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Django Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="/" class="nav-brand">Django<span>Lab</span></a>
+</nav>
+
+<div class="page-wrapper">
+    <div class="login-page">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="sec-marker" style="margin-bottom:0.5rem;">
+                    <span class="sec-num">Secure Access</span>
+                    <span class="sec-line"></span>
+                </div>
+                <h2>Sign <span>In</span></h2>
+                <p class="login-sub">Enter your credentials to continue</p>
+            </div>
+
+            {% if form.non_field_errors %}
+            <ul class="messages-list" style="margin-bottom:1rem;">
+                {% for error in form.non_field_errors %}
+                <li class="error">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="form-card" style="background:transparent; border:none; padding:0; max-width:100%;">
+                    {{ form.as_p }}
+                    <div class="form-actions" style="border-top:none; padding-top:0; margin-top:1.5rem;">
+                        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

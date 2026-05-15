@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard — Django Lab{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div class="sec-marker">
+            <span class="sec-num">Protected</span>
+            <span class="sec-line"></span>
+        </div>
+        <h1><span>Dashboard</span></h1>
+    </div>
+
+    <div class="welcome-banner">
+        <p>Welcome back, <span>{{ user.username }}</span>. You are logged in and have full access to all management features.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dash-card">
+            <h3>Students</h3>
+            <a href="{% url 'student_list' %}">View all students</a>
+            <a href="{% url 'student_add' %}">Add new student</a>
+        </div>
+        <div class="dash-card">
+            <h3>Courses</h3>
+            <a href="{% url 'course_list' %}">View all courses</a>
+            <a href="{% url 'course_add' %}">Add new course</a>
+        </div>
+        <div class="dash-card">
+            <h3>Registrations</h3>
+            <a href="{% url 'registration_list' %}">View all registrations</a>
+            <a href="{% url 'registration_add' %}">Add registration</a>
+        </div>
+        <div class="dash-card">
+            <h3>Account</h3>
+            <form action="{% url 'logout' %}" method="post" style="display:block;">
+                {% csrf_token %}
+                <button type="submit" style="background:none;border:none;cursor:pointer;font-family:var(--font-sans);font-size:0.88rem;color:rgba(244,240,232,0.7);padding:0.4rem 0;display:flex;align-items:center;gap:0.5rem;text-transform:none;letter-spacing:0;transition:color 0.15s;width:100%;">
+                    Sign out
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

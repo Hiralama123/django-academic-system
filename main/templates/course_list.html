@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses — Django Lab{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div class="sec-marker">
+            <span class="sec-num">Catalogue</span>
+            <span class="sec-line"></span>
+        </div>
+        <h1><span>Courses</span></h1>
+        <p>All available courses</p>
+    </div>
+
+    <div class="action-bar">
+        <span style="font-size:0.82rem; color:rgba(244,240,232,0.4);">
+            {{ courses|length }} course{% if courses|length != 1 %}s{% endif %}
+        </span>
+        <a href="{% url 'course_add' %}" class="btn btn-primary">+ Add Course</a>
+    </div>
+
+    {% if courses %}
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Credits</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td style="color:var(--gold); font-weight:600; font-size:0.82rem; letter-spacing:0.04em;">
+                        {{ course.course_code }}
+                    </td>
+                    <td style="font-weight:500;">{{ course.course_name }}</td>
+                    <td>{{ course.instructor }}</td>
+                    <td>{{ course.credits }}</td>
+                    <td>
+                        <div class="td-actions">
+                            <a href="{% url 'course_edit' course.id %}" class="btn btn-ghost btn-sm">Edit</a>
+                            <a href="{% url 'course_delete' course.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No courses found.</p>
+        <a href="{% url 'course_add' %}" class="btn btn-primary">Add First Course</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

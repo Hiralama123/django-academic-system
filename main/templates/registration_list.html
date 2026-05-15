@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrations — Django Lab{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div class="sec-marker">
+            <span class="sec-num">Enrolments</span>
+            <span class="sec-line"></span>
+        </div>
+        <h1>Course <span>Registrations</span></h1>
+        <p>Student-course enrolment records</p>
+    </div>
+
+    <div class="action-bar">
+        <span style="font-size:0.82rem; color:rgba(244,240,232,0.4);">
+            {{ registrations|length }} record{% if registrations|length != 1 %}s{% endif %}
+        </span>
+        <a href="{% url 'registration_add' %}" class="btn btn-primary">+ Add Registration</a>
+    </div>
+
+    {% if registrations %}
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Date</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reg in registrations %}
+                <tr>
+                    <td style="font-weight:500;">{{ reg.student.name }}</td>
+                    <td>{{ reg.course.course_name }}</td>
+                    <td style="font-size:0.82rem; color:rgba(244,240,232,0.5);">{{ reg.registration_date }}</td>
+                    <td>
+                        {% if reg.grade %}
+                        <span style="font-weight:700; color:var(--gold);">{{ reg.grade }}</span>
+                        {% else %}
+                        <span style="color:rgba(244,240,232,0.3); font-size:0.82rem;">N/A</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="td-actions">
+                            <a href="{% url 'registration_edit' reg.id %}" class="btn btn-ghost btn-sm">Edit</a>
+                            <a href="{% url 'registration_delete' reg.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No registrations found.</p>
+        <a href="{% url 'registration_add' %}" class="btn btn-primary">Add First Registration</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

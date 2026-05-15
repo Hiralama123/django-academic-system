@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Students — Django Lab{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div class="sec-marker">
+            <span class="sec-num">Records</span>
+            <span class="sec-line"></span>
+        </div>
+        <h1><span>Students</span></h1>
+        <p>All enrolled students</p>
+    </div>
+
+    <div class="action-bar">
+        <span style="font-size:0.82rem; color:rgba(244,240,232,0.4);">
+            {{ students|length }} student{% if students|length != 1 %}s{% endif %}
+        </span>
+        <a href="{% url 'student_add' %}" class="btn btn-primary">+ Add Student</a>
+    </div>
+
+    {% if students %}
+    <div class="student-grid">
+        {% for student in students %}
+        <div class="student-card">
+            <div class="student-name">{{ student.name }}</div>
+            <div class="student-email">{{ student.email }}</div>
+            <div class="student-actions">
+                <a href="{% url 'student_edit' student.id %}" class="btn btn-ghost btn-sm">Edit</a>
+                <a href="{% url 'student_delete' student.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No students found.</p>
+        <a href="{% url 'student_add' %}" class="btn btn-primary">Add First Student</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
