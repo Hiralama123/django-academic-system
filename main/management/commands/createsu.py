@@ -4,24 +4,30 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = 'Create a superuser from env vars if no superuser exists yet'
+    help = 'Create demo user and optional superuser from env vars on deploy'
 
     def handle(self, *args, **options):
         User = get_user_model()
 
-        if User.objects.filter(is_superuser=True).exists():
-            self.stdout.write('Superuser already exists — skipping.')
-            return
+        # Always ensure the demo user exists with the correct password
+        demo, created = User.objects.get_or_create(username='demo', defaults={'email': 'demo@demo.com'})
+        demo.set_password('demo1234')
+        demo.save()
+        if created:
+            self.stdout.write('Demo user created.')
+        else:
+            self.stdout.write('Demo user password reset.')
 
+        # Create superuser from env vars if one doesn't exist yet
         username = os.environ.get('DJANGO_SUPERUSER_USERNAME')
         password = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
         email = os.environ.get('DJANGO_SUPERUSER_EMAIL', '')
 
         if not username or not password:
-            self.stderr.write(
-                'Skipping superuser creation: '
-                'DJANGO_SUPERUSER_USERNAME and DJANGO_SUPERUSER_PASSWORD must be set.'
-            )
+            return
+
+        if User.objects.filter(username=username).exists():
+            self.stdout.write(f'Superuser "{username}" already exists — skipping.')
             return
 
         User.objects.create_superuser(username=username, email=email, password=password)
