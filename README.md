@@ -3,6 +3,8 @@
 A full-featured academic management web application built with Django. Manage students, courses, and course registrations through a clean, authenticated interface styled with a dark gold-and-maroon design system.
 
 ---
+## Live Demo
+🌐 https://django-academic-system-production.up.railway.app
 
 ## Features
 
@@ -109,9 +111,6 @@ python manage.py createsuperuser
 # 6. Start the development server
 python manage.py runserver
 ```
-
-Open **http://127.0.0.1:8000/** in your browser.
-
 ---
 
 ## Usage
